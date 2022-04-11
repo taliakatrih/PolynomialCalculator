@@ -26,10 +26,11 @@ public class Integer implements Scalar {
         return ans;
     }
     Scalar neg(){
-
+        Integer min1= new Integer(-1);
+        return this.mul(min1);
     }
     Scalar power(int exponent){
-
+        return Math.pow()
     }
     Scalar sign(){
 

@@ -7,32 +7,48 @@ public class Integer implements Scalar {
     {
         this.number =num;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
     public String toString(){
-        String ans = " " + number;
+        String ans = " " + getNumber();
         return ans;
     }
     public Scalar add(Scalar s){
         return s.add(this);
     }
-    public Scalar add(Integer s){
-        Scalar ans = new Integer(number+ s.number);
+    public Scalar addInt(Integer s){
+        Scalar ans = new Integer(getNumber()+ s.getNumber());
         return ans;
     }
-    public Scalar mul( Scalar s){
+    public Scalar addRat(Rational s){
+        Scalar ans = new Rational(getNumber()*s.getDenominator()+ s.getNumerator(),s.getDenominator());
+        return ans;
+    }
+    public Scalar mul(Scalar s){
         return s.mul(this);
     }
-    public Scalar mul( Integer s){
-        Scalar ans = new Integer(number* s.number);
+    public Scalar mulInt( Integer s){
+        Scalar ans = new Integer(getNumber()* s.getNumber());
         return ans;
     }
-    Scalar neg(){
-        Integer min1= new Integer(-1);
-        return this.mul(min1);
-    }
-    Scalar power(int exponent){
-        return Math.pow()
-    }
-    Scalar sign(){
+    public Scalar mulRat(Rational s){
+        Scalar ans = new Rational((getNumber()*s.getDenominator()+ s.getNumerator()),s.getDenominator());
+        return ans;
 
+    }
+    public Scalar neg(){
+        Integer min1= new Integer(-1);
+        Scalar ans=this.mul(min1);
+        return ans;
+    }
+    public Scalar power(int exponent){
+        Scalar ans= new Integer((int)Math.pow(this.getNumber(), exponent));
+        return ans;
+    }
+    public int sign(){
+        return (int) Math.signum((int)this.getNumber());
     }
 }

@@ -3,6 +3,7 @@ package Calculator;
 public class Rational implements Scalar{
     private int numerator;
     private int denominator;
+
     public Rational(int numerator, int denominator){
         this.numerator= numerator;
         this.denominator= denominator;
@@ -13,17 +14,24 @@ public class Rational implements Scalar{
     public int getNumerator() {
         return numerator;
     }
+    public void setNumerator(int numerator) {
+        this.numerator = numerator;
+    }
+    public void setDenominator(int denominator) {
+        this.denominator = denominator;
+    }
+
     public Rational reduce(){
         Rational ans = new Rational(getNumerator(), getDenominator());
+
         for(int i=2; i<= Math.min(getNumerator(), getDenominator()); i++){
             if( ans.getNumerator()%i==0 & ans.getDenominator()%i==0){
                 ans.numerator= ans.getNumerator()/i;
                 ans.denominator= ans.getDenominator()/i;
             }
         }
-        if( ans.getNumerator()%(-1)==0 & ans.getDenominator()%(-1)==0) {
-            ans.numerator = ans.getNumerator() / (-1);
-            ans.denominator = ans.getDenominator() / (-1);
+        if( ans.getNumerator()<0 & ans.getDenominator()<0) {
+            ans.neg();
         }
         return ans;
     }
@@ -38,7 +46,11 @@ public class Rational implements Scalar{
                 ans = ans +'0';
             else{
                 Rational low = this.reduce();
-                ans = ans+ low;
+                if(low.getDenominator()<0){
+                    low.setNumerator(0- low.getNumerator());
+                    low.setDenominator(0-low.getDenominator());
+                }
+                ans = ans+ low.getNumerator()+ "/" + low.getDenominator();
             }
         }
         return ans;
@@ -46,11 +58,11 @@ public class Rational implements Scalar{
     public Scalar add(Scalar s){
         return s.add(this);
     }
-    public Scalar addInt(Integer s){
+    public Scalar add(Integer s){
         Scalar ans = new Rational(s.getNumber()*getDenominator()+ getNumerator(),getDenominator());
         return ans;
     }
-    public Scalar addRat(Rational s){
+    public Scalar add(Rational s){
         Scalar ans = new Rational((this.getNumerator()*s.getDenominator())+(s.getNumerator()*this.getDenominator()),this.getDenominator()*s.getDenominator());
         return ans;
     }
@@ -58,12 +70,12 @@ public class Rational implements Scalar{
         return s.mul(this);
     }
 
-    public Scalar mulInt(Integer s){
+    public Scalar mul(Integer s){
         Scalar ans = new Rational(this.getNumerator()*s.getNumber(), this.getDenominator());
         return ans;
     }
 
-    public Scalar mulRat(Rational s){
+    public Scalar mul(Rational s){
         Scalar ans = new Rational(s.getNumerator()*this.getNumerator(), s.getDenominator()*this.getDenominator());
         return ans;
     }

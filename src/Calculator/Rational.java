@@ -24,14 +24,20 @@ public class Rational implements Scalar{
     public Rational reduce(){
         Rational ans = new Rational(getNumerator(), getDenominator());
 
-        for(int i=2; i<= Math.min(getNumerator(), getDenominator()); i++){
+        for(int i=2; i<= Math.min(Math.abs(getNumerator()), Math.abs(getDenominator())); i++){
             if( ans.getNumerator()%i==0 & ans.getDenominator()%i==0){
                 ans.numerator= ans.getNumerator()/i;
                 ans.denominator= ans.getDenominator()/i;
             }
         }
+        if(ans.getNumerator()==0)
+            ans.setDenominator(1);
         if( ans.getNumerator()<0 & ans.getDenominator()<0) {
             ans.neg();
+        }
+        else if( ans.getDenominator()<0 & ans.getNumerator()>0){
+            ans.setNumerator(0-ans.getNumerator());
+            ans.setDenominator(0-ans.getDenominator());
         }
         return ans;
     }
@@ -76,8 +82,8 @@ public class Rational implements Scalar{
     }
 
     public Scalar mul(Rational s){
-        Scalar ans = new Rational(s.getNumerator()*this.getNumerator(), s.getDenominator()*this.getDenominator());
-        return ans;
+        Rational ans = new Rational(s.getNumerator()*this.getNumerator(), s.getDenominator()*this.getDenominator());
+        return ans.reduce();
     }
     public Scalar neg(){
         Integer min1= new Integer(-1);
@@ -85,8 +91,8 @@ public class Rational implements Scalar{
         return ans;
     }
     public Scalar power(int exponent){
-        Scalar ans = new Rational((int)Math.pow(this.getNumerator(), exponent),(int)Math.pow(this.getDenominator(),exponent));
-        return ans;
+        Rational ans = new Rational((int)Math.pow(this.getNumerator(), exponent),(int)Math.pow(this.getDenominator(),exponent));
+        return ans.reduce();
     }
     public int sign(){
         if(this.getNumerator()*this.getDenominator()>0)
@@ -97,6 +103,9 @@ public class Rational implements Scalar{
     }
     public boolean equals( Object ob1){
         if( ob1 instanceof Rational){
+            this.setNumerator(this.reduce().getNumerator());
+            this.setDenominator(this.reduce().getDenominator());
+            ob1= ((Rational) ob1).reduce();
             return (((Rational) ob1).getNumerator()==this.getNumerator()) && (((Rational) ob1).getDenominator()== this.getDenominator())  ;
         }
         else

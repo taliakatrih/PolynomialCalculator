@@ -7,6 +7,7 @@ public class Polynomial {
     public Polynomial (TreeMap<java.lang.Integer,Monomial> monomials){
         this.monomials= monomials;
     }
+
     public static Polynomial build( String input){
         TreeMap<java.lang.Integer, Monomial> ans = new TreeMap<>();
         java.lang.Integer exp = 0;
@@ -83,6 +84,20 @@ public class Polynomial {
         }
         return ans;
     }
-
+    public boolean equals( Object ob1){
+        if( ob1 instanceof Polynomial) {
+            Polynomial o1 = (Polynomial) ob1;
+            if(this.monomials.keySet().size() != o1.monomials.keySet().size())
+                return false;
+            for (java.lang.Integer key : this.monomials.keySet()) {
+                if (!o1.monomials.containsKey(key))
+                    return false;
+                if (!(this.monomials.get(key).equals(o1.monomials.get(key))))
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
 

@@ -26,15 +26,15 @@ public class Monomial {
             return ans;
         }
         else if(m.getExponent()==0 ){
-            Monomial ans = new Monomial(m.getExponent(), this.getCoefficient());
+            Monomial ans = new Monomial(this.getExponent(), this.getCoefficient().mul(m.getCoefficient()));
             return ans;
         }
         else if( this.getExponent()==0) {
-            Monomial ans = new Monomial(this.getExponent(), m.getCoefficient());
+            Monomial ans = new Monomial(m.getExponent(), m.getCoefficient().mul(this.getCoefficient()));
             return ans;
         }
         else {
-            Monomial ans = new Monomial(m.getExponent() * this.getExponent(), this.getCoefficient().mul(m.getCoefficient()));
+            Monomial ans = new Monomial(m.getExponent() + this.getExponent(), this.getCoefficient().mul(m.getCoefficient()));
             return ans;
         }
     }
@@ -68,6 +68,8 @@ public class Monomial {
             return this.getCoefficient().toString();
         if( this.getExponent()==1)
             return this.getCoefficient().toString() +"x";
+        if( this.getCoefficient().equals(new Integer(0)))
+            return "0";
         if( this.getCoefficient().toString().equals("1")){
             ans = ans+ "x^" + this.getExponent();
         }
@@ -75,7 +77,14 @@ public class Monomial {
             ans = ans+ "-x^" + this.getExponent();
         }
         else
-            ans = ans + this.getCoefficient().toString() + "x ^" + this.getExponent();
+            ans = ans + this.getCoefficient().toString() + "x^" + this.getExponent();
         return ans;
+    }
+    public boolean equals( Object ob1){
+        if( ob1 instanceof Monomial){
+            return ((Monomial) ob1).getExponent()==this.getExponent() && ((Monomial) ob1).getCoefficient().equals(this.getCoefficient());
+        }
+        else
+            return false;
     }
 }

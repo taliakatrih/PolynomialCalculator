@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RationalTest {
-    private Scalar test0;
-    private Scalar test26;
-    private Scalar testm34;
-    private Scalar testm46;
-    private Scalar testm39;
+    private Rational test0;
+    private Rational test26;
+    private Rational testm34;
+    private Rational testm46;
+    private Rational testm39;
 
     @Before
     public void setUp(){
@@ -23,12 +23,12 @@ public class RationalTest {
 
     @Test
     public void reduce() {
-//        Rational expected1 = new Rational(0,0);
-//        Rational expected2 = new Rational(-35);
-//        Rational expected3 = new Rational(14);
-////        assertEquals((Object) expected1, (Object) );
-//        assertEquals((Object) expected2, (Object) test26.re);
-//        assertEquals((Object) expected3, (Object) testn7.mul(testn2));
+        Rational expected1 = new Rational(0,0);
+        Rational expected2 = new Rational(1,3);
+        Rational expected3 = new Rational(-2,3);
+        assertEquals((Object) expected1, (Object) test0.reduce() );
+        assertEquals((Object) expected2, (Object) test26.reduce());
+        assertEquals((Object) expected3, (Object) testm46.reduce());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class RationalTest {
 
     @Test
     public void testAdd() {
-        Rational expected1 = new Rational(2,6);
+        Rational expected1 = new Rational(1,3);
         Rational expected2 = new Rational(-3,4);
         Rational expected3 = new Rational(-34,24);
         assertEquals((Object) expected1, (Object) test0.add(test26));
@@ -62,8 +62,8 @@ public class RationalTest {
     @Test
     public void testNeg() {
         Rational expected1 = new Rational(0,1);
-        Rational expected2 = new Rational(-2,6);
-        Rational expected3 = new Rational(-3,9);
+        Rational expected2 = new Rational(-1,3);
+        Rational expected3 = new Rational(-1,3);
         Rational expected4 = new Rational(3,4);
         assertEquals((Object) expected1, (Object) test0.neg());
         assertEquals((Object) expected2, (Object) test26.neg());
@@ -74,8 +74,8 @@ public class RationalTest {
     @Test
     public void testPower() {
         Rational expected1 = new Rational(0,1);
-        Rational expected2 = new Rational(16,36);
-        Rational expected3 = new Rational(9,81);
+        Rational expected2 = new Rational(4,9);
+        Rational expected3 = new Rational(1,9);
         Rational expected4 = new Rational(1,1);
         assertEquals((Object) expected1, (Object) test0.power(1));
         assertEquals((Object) expected2, (Object) testm46.power(2));

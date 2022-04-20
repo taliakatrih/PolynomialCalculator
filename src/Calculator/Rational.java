@@ -95,4 +95,11 @@ public class Rational implements Scalar{
             return 0;
         else return -1;
     }
+    public boolean equals( Object ob1){
+        if( ob1 instanceof Rational){
+            return (((Rational) ob1).getNumerator()==this.getNumerator()) && (((Rational) ob1).getDenominator()== this.getDenominator())  ;
+        }
+        else
+            return false;
+    }
 }

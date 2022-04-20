@@ -44,12 +44,24 @@ public class Monomial {
     }
     public Monomial derivative(){
         Integer exp= new Integer(this.getExponent());
-        Monomial ans = new Monomial(this.getExponent()-1, this.getCoefficient().mul(exp));
-        return ans;
+        if(exp.getNumber()==0){
+            Scalar zero = new Integer(0);
+            Monomial ans = new Monomial(0,zero);
+            return ans;
+        }
+        else if(exp.getNumber()==1){
+            Monomial ans= new Monomial(0,this.getCoefficient());
+            return ans;
+        }
+        else {
+            Monomial ans = new Monomial(this.getExponent() - 1, this.getCoefficient().mul(exp));
+            return ans;
+        }
     }
     public int sign(){
         return this.coefficient.sign();
     }
+
     public String toString(){
         String ans ="";
         if( this.getExponent()==0)

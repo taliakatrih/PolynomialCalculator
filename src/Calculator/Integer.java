@@ -56,7 +56,7 @@ public class Integer implements Scalar {
 
     public boolean equals( Object ob1){
         if( ob1 instanceof Integer){
-            return ((Integer) ob1).number== this.number;
+            return ((Integer) ob1).getNumber()== this.getNumber();
         }
         else
             return false;

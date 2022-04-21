@@ -13,6 +13,7 @@ public class MonomialTest {
     private Monomial test52;
     private Monomial test40;
     private Monomial test02;
+    private Monomial test12;
 
     @Before
     public void setUp() {
@@ -22,7 +23,18 @@ public class MonomialTest {
         test52 = new Monomial(2,new Integer(5));
         test40 = new Monomial(0,new Integer(4));
         test02 = new Monomial(2,new Integer(0));
+        test12 = new Monomial(2,new Integer(1));
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("toString is wrong", "3x^4",test34.toString());
+        assertEquals("toString is wrong", "-2x^4",testm24.toString());
+        assertEquals("toString is wrong", "-2x",testm21.toString());
+        assertEquals("toString is wrong", "0",test02.toString());
+        assertEquals("toString is wrong", "x^2",test12.toString());
+    }
+
     @Test
     public void sign() {
         java.lang.Integer expected1= 0;
@@ -74,13 +86,4 @@ public class MonomialTest {
         assertEquals((Object) expected3, (Object) test02.add(test52));
 
     }
-
-    @Test
-    public void testToString() {
-        assertEquals("toString is wrong", "3x^4",test34.toString());
-        assertEquals("toString is wrong", "-2x^4",testm24.toString());
-        assertEquals("toString is wrong", "-2x",testm21.toString());
-        assertEquals("toString is wrong", "0",test02.toString());
-    }
-
 }

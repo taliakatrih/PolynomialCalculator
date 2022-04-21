@@ -25,6 +25,9 @@ public class Polynomial {
                     exp++;
                 }
             }
+            else{
+                exp++;
+            }
         }
         Polynomial res = new Polynomial(ans);
         return res;
@@ -80,8 +83,14 @@ public class Polynomial {
     public String toString(){
         String ans = "";
         for(java.lang.Integer key: this.monomials.keySet()){
+            if(this.monomials.get(key).sign()==-1) {
+                ans = ans.substring(0, ans.length() - 1);
+            }
             ans= ans+ this.monomials.get(key).toString()+ "+";
         }
+        if( ans.charAt(ans.length()-1)=='+')
+            ans = ans.substring(0,ans.length()-1);
+
         return ans;
     }
     public boolean equals( Object ob1){
@@ -90,7 +99,7 @@ public class Polynomial {
             if(this.monomials.keySet().size() != o1.monomials.keySet().size())
                 return false;
             for (java.lang.Integer key : this.monomials.keySet()) {
-                if (!o1.monomials.containsKey(key))
+                if (!(o1.monomials.containsKey(key)))
                     return false;
                 if (!(this.monomials.get(key).equals(o1.monomials.get(key))))
                     return false;

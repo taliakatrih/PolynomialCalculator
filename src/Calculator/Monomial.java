@@ -66,14 +66,21 @@ public class Monomial {
         String ans ="";
         if( this.getExponent()==0)
             return this.getCoefficient().toString();
-        if( this.getExponent()==1)
+        if( this.getExponent()==1 ){
+            if(this.getCoefficient().equals(new Integer(1))){
+                return "x";
+            }
+            if(this.getCoefficient().equals(new Integer(-1))){
+                return "-x";
+            }
             return this.getCoefficient().toString() +"x";
+        }
         if( this.getCoefficient().equals(new Integer(0)))
             return "0";
-        if( this.getCoefficient().toString().equals("1")){
+        if(this.getCoefficient().equals(new Integer(1))){
             ans = ans+ "x^" + this.getExponent();
         }
-        else if( this.getCoefficient().toString().equals("-1")){
+        else if( this.getCoefficient().equals(new Integer(-1))){
             ans = ans+ "-x^" + this.getExponent();
         }
         else
